@@ -3,6 +3,7 @@ from data import Player, generateData, generatePlayers
 from pprint import pp  # built-in pretty print formatting for convenience
 from copy import deepcopy
 from irving import irving
+import time
 
 """
 This is our "main" function that gets called. It'll find all the worst matches
@@ -165,5 +166,8 @@ if __name__ == "__main__":
     all_players: list[Player] = generatePlayers(PLAYER_COUNT, ROUNDS)
     player_dict: dict[Player, list[Player]] = generateData(all_players)
     pp(player_dict)
+    start = time.time()
     matches = matcher(player_dict, ROUNDS)
+    end = time.time()
     pp(matches)
+    print(f"Execution time: {end - start:.4f} seconds")
