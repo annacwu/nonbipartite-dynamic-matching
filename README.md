@@ -30,4 +30,8 @@ Generates a dictionary mapping each player to a randomized preference list of ot
 
 ## `doval.py`
 
-This file contains the altered dynamic matching algorithm. `matcher(prefs, rounds)` serves as the main function, and calls various helper functions to carry out Doval's algorithm. Most of the implementation stays as true to Doval's description of the algorithm as possible, with the primary change being that where she calls Gale-Shapley, we call our implementation of Irving's algorithm.
+This file contains the altered dynamic matching algorithm. `matcher(prefs, rounds)` serves as the main function, and calls various helper functions to carry out Doval's algorithm. Most of the implementation stays as true to Doval's description of the algorithm as possible, with the primary change being that where she calls Gale-Shapley, we call our implementation of Irving's algorithm. Additionally, the `worst_matches` function is used to calculate conjectures at the start, which takes a slightly different approach than the original algorithm by implementing recursive methods of running Irving's and truncating preferences for increased efficiency.
+
+## `irving.py`
+Irving's is a slighly altered version of the [original Irving's algorithm](https://uvacs2102.github.io/docs/roomates.pdf) as well, also implementing a recursive call to repeat the round 1 reduction in between cycle reductions until a stable match is found or players preference lists contain 1 person or less. It is wrapped in the `irving(prefs, worst)` function, though the actual algorithm is implemented in `irving_full(prefs, worst)`. This ensures that in practice, the algorithm outputs something we can work with from period to period in the `matcher` function. 
+
